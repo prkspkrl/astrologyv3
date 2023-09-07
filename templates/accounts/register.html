@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+            <div class="row align-items-center" style=" width:50%" >
+                <form action="POST">
+                    <div class="form-group">
+                        <input type="text" name="" placeholder="Enter name" class="form-control" id="">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="" placeholder="Enter email" class="form-control" id="">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="" placeholder="Enter password here" class="form-control" id="">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="" placeholder="Enter mobile number" class="form-control" id="">
+                    </div>
+                    <div class="form-group">
+                        <select name="" class="form-control" id="">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <div class="text-center">
+                        <a href="{% url 'registeruser' %}" class="as_btn">Sign Up</a>
+                    </div>
+                </form>
+                <p class="text-center as_margin0 as_padderTop20">Have An Account ? <a href="#" class="as_orange as_login">Login</a></p>
+            </div>
+
+
+{% endblock %}

@@ -1,0 +1,207 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+        <section class="as_banner_wrapper">
+            <div class="container-fluid">
+                <div class="row as_verticle_center">
+                    <div class="col-lg-6 order-lg-1 col-md-6 order-md-1 col-sm-12 order-sm-1 col-12 order-2">
+
+                        <div class="as_banner_slider">
+                            {% for item in slider %}
+                            <div class="as_banner_detail">
+                                <h5 class="as_orange">{{item.sub_title}}</h5>
+                                <h1>{{item.title}}</h1>
+                                <p>{{item.description}}</p>
+                                <a href="javascript:;" class="as_btn">{{item.cta}}</a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-lg-6 order-lg-2 col-md-6 order-md-2 col-sm-12 order-sm-2 col-12 order-1">
+                        <div class="as_banner_img text-center">
+                            <img src='{% static  "images/banner_image.png" %}'  alt="" class="img-responsive">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="as_about_wrapper as_padderTop80 as_padderBottom80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div class="as_about_slider">
+                            <div>
+                                <div class="as_aboutimg text-right">
+                                    <img src='{% static "images/about1.jpg" %}'  alt="" class="img-responsive">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="as_aboutimg text-right">
+                                    <img src='{% static "images/about2.jpg" %}'  alt="" class="img-responsive">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="as_aboutimg text-right">
+                                    <img src='{% static "images/about3.jpg" %}'  alt="" class="img-responsive">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="as_aboutimg text-right">
+                                    <img src='{% static "images/about4.jpg" %}'  alt="" class="img-responsive">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                        <h1 class="as_heading">{{aboutus.title}}</h1>
+                        <p>{{aboutus.description}}</p>
+                        <a href="javascript:;" class="as_btn">{{aboutus.cta}}</a>
+
+                        <div class="as_contact_expert">
+                            <span class="as_icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="20" height="20" viewBox="0 0 20 20"> <defs><style>.cls-1{fill:#fff;fill-rule:evenodd}</style></defs> <path d="M19.797,10.487 C19.668,10.616 19.493,10.689 19.310,10.689 C18.929,10.689 18.620,10.380 18.620,9.999 C18.615,5.241 14.759,1.385 10.000,1.379 C9.619,1.379 9.310,1.070 9.310,0.689 C9.310,0.308 9.619,-0.000 10.000,-0.000 C15.520,0.006 19.993,4.478 19.999,9.999 C19.999,10.183 19.927,10.358 19.797,10.487 ZM15.172,9.999 C15.169,7.144 12.855,4.830 10.000,4.827 C9.619,4.827 9.310,4.518 9.310,4.138 C9.310,3.757 9.619,3.448 10.000,3.448 C13.617,3.452 16.547,6.383 16.551,9.999 C16.551,10.380 16.243,10.689 15.862,10.689 C15.481,10.689 15.172,10.380 15.172,9.999 ZM12.864,14.155 C13.076,14.182 13.288,14.109 13.438,13.957 L14.982,12.413 C15.209,12.186 15.563,12.146 15.835,12.317 L19.655,14.775 C19.955,14.965 20.063,15.350 19.905,15.668 L18.045,19.616 C17.918,19.873 17.645,20.024 17.360,19.995 C15.394,19.789 10.563,18.932 5.815,14.183 C1.067,9.435 0.210,4.604 0.003,2.638 C-0.026,2.352 0.125,2.079 0.382,1.952 L4.331,0.093 C4.649,-0.067 5.036,0.043 5.224,0.344 L7.684,4.164 C7.854,4.436 7.814,4.790 7.586,5.017 L6.042,6.560 C5.890,6.711 5.818,6.924 5.845,7.135 C5.942,7.900 6.373,9.809 8.282,11.718 C10.191,13.627 12.099,14.057 12.864,14.155 Z" class="cls-1"/> </svg>
+                            </span>
+                            <div>
+                                <h5 class="as_white">Contact Our Expert Astrologers</h5>
+                                <h1 class="as_orange">{{aboutus.contact}}</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="as_service_wrapper as_padderTop80 as_padderBottom80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1 class="as_heading as_heading_center">our services</h1>
+                        <p class="as_font14 as_padderBottom5">Consectetur adipiscing elit, sed do eiusmod tempor incididuesdeentiut labore <br>etesde dolore magna aliquapspendisse and the gravida.</p>
+                    </div>
+
+{% for item in our_service %}
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="as_service_box text-center">
+                            <span class="as_icon">
+                                {% if item.image %}
+                                <img src="{{ item.image.url }}" alt="">
+                                {% else %}
+                                <img src="{% static 'images/svg/service1.svg' %}" alt="">
+                                {% endif %}
+                            </span>
+
+                            <h4 class="as_subheading">{{item.title}}</h4>
+                            <p>{{item.description}}</p>
+                            <a href="#" class="as_link">{{item.cta}}</a>
+                        </div>
+                    </div>
+{% endfor %}
+
+                </div>
+            </div>
+        </section>
+        <section class="as_know_sign_wrapper as_padderBottom80 as_padderTop80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1 class="as_heading as_heading_center">Know Your Zodiac Sign</h1>
+                        <p class="as_font14 as_margin0 as_padderBottom50">Consectetur adipiscing elit, sed do eiusmod tempor incididuesdeentiut labore <br>etesde dolore magna aliquapspendisse and the gravida.</p>
+
+
+                        <div class="as_sign_form text-left">
+                            <ul>
+                                <li class="as_form_box">
+                                    <h3 class="as_subheading">Date Of Birth</h3>
+                                    <div class="as_input_feild">
+                                        <input type="text" name="" class="form-control as_datepicker" placeholder="DD/MM/YYYY" id="">
+                                        <span><img src='{% static "images/svg/date.svg" %}'  alt=""></span>
+                                    </div>
+                                </li>
+                                <li class="as_form_box">
+                                    <h3 class="as_subheading">Time Of Birth</h3>
+                                    <div class="as_input_feild">
+                                        <input type="text" name="" class="form-control as_timepicker" placeholder="08:00" id="">
+                                        <span><img src='{% static "images/svg/time.svg" %}'  alt=""></span>
+                                    </div>
+                                </li>
+                                <li class="as_form_box">
+                                    <h3 class="as_subheading">Place Of Birth</h3>
+                                    <div class="as_input_feild">
+                                        <input type="text" name="" class="form-control" placeholder="Enter City Name...." id="">
+                                        <span><img src='{% static "images/svg/map1.svg" %}'  alt=""></span>
+                                    </div>
+                                </li>
+                                <li class="as_form_box">
+                                   <a href="javascript:;" class="as_btn">find zodiac</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="as_customer_wrapper as_padderBottom80 as_padderTop80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1 class="as_heading as_heading_center">What Our Customers Say</h1>
+                        <p class="as_font14 as_margin0 as_padderBottom50">Consectetur adipiscing elit, sed do eiusmod tempor incididuesdeentiut labore <br>etesde dolore magna aliquapspendisse and the gravida.</p>
+                    </div>
+
+                        <div class="row as_customer_slider">
+
+                            {% for item in review %}
+                            <div class="col-lg-6 col-md-6">
+                                <div class="as_customer_box text-center">
+                                    <span class="as_customer_img">
+                                        <img src='{{item.photo.url}}' alt="">
+                                        <span><img src='{% static "images/svg/quote1.svg" %}'  alt=""></span>
+                                    </span>
+                                    <p class="as_margin0">{{item.review}} </p>
+                                    <h3 >{{item.name}}</h3>
+                                    <p class="as_margin0">{% if item.designation %} {{item.designation}} {% endif %}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="as_whychoose_wrapper as_padderTop80 as_padderBottom50">
+            <div class="container">
+                <div class="row as_verticle_center">
+                    <div class="col-lg-3 col-md-12">
+                        <h1 class="as_heading">Why Choose Us</h1>
+                        <p class="as_font14 as_margin0">Consectetur adipiscing elit, sed do eiusmod tempor incididuesdeentiut.</p>
+                    </div>
+                    <div class="col-lg-9 col-md-12">
+                        <div class="row">
+                            {% for item in whychoose %}
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                                <div class="as_whychoose_box text-center">
+                                    <span class="as_number"><span><span data-from="0" data-to="512"
+                                        data-speed="5000">{{item.numbers}}</span>+</span>
+
+                                    {% if item.image %}
+                                        <img src="{{ item.image.url }}" alt=""></span>
+                                    {% else %}
+                                        <img src='{% static "images/svg/shape.svg" %}'  alt=""></span>
+                                    {% endif %}
+
+
+                                    <h4>{{item.title}}</h4>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+{% endblock %}
