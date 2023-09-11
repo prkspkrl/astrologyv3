@@ -1,23 +1,71 @@
-                    <div class="as_login_box active">
-                        <form action="post">
-                            <div class="form-group">
-                                <input type="text" name="" placeholder="Enter email" class="form-control" id="">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="" placeholder="Enter password here" class="form-control" id="">
-                            </div>
-                            <div class="form-group">
-                                <div class="as_login_data">
-                                    <label>Remember me
-                                         <input type="checkbox" name="as_remember_me" value="">
-                                         <span class="checkmark"></span>
-                                    </label>
-                                    <a href="#">Forgot password ?</a>
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+    <!-- Middle Section with Login/Register Form -->
+    <section class="as_middle_section" style="margin-top: 50px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
+                    <div class="as_login_register_form">
+                        <!-- Login Form -->
+                        <div class="as_login_box active">
+                            <h4>Login</h4>
+                            <form action="#" method="POST">
+                                <div class="form-group">
+                                    <input type="text" name="email" placeholder="Enter email" class="form-control" required>
                                 </div>
-                            </div>
-                            <div class="text-center">
-                                <a href="javascript:;" class="as_btn">login</a>
-                            </div>
-                        </form>
-                        <p class="text-center as_margin0 as_padderTop20">Create An Account ? <a href="javascript:;" class="as_orange as_signup">SignUp</a></p>
+                                <div class="form-group">
+                                    <input type="password" name="password" placeholder="Enter password here" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <div class="as_login_data">
+                                        <label>
+                                            Remember me
+                                            <input type="checkbox" name="remember_me" value="1">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <a href="#">Forgot password?</a>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="as_btn">Login</button>
+                                </div>
+                            </form>
+                            <p class="text-center as_margin0 as_padderTop20">Create an Account? <a href="#" class="as_orange as_signup">Sign Up</a></p>
+                        </div>
+
+                        <!-- Registration Form -->
+                        <div class="as_signup_box">
+                            <h4>Sign Up</h4>
+                            <form action="#" method="POST">
+                                <div class="form-group">
+                                    <input type="text" name="name" placeholder="Enter name" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="email" placeholder="Enter email" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" placeholder="Enter password here" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="mobile" placeholder="Enter mobile number" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <select name="gender" class="form-control" required>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="as_btn">Sign Up</button>
+                                </div>
+                            </form>
+                            <p class="text-center as_margin0 as_padderTop20">Have an Account? <a href="#" class="as_orange as_login">Login</a></p>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

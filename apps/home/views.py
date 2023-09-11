@@ -17,3 +17,5 @@ def Homepage(request):
         'whychoose':whychoose,
     }
     return render(request, 'home.html', context)
+
+
