@@ -9,3 +9,6 @@ User = get_user_model()
 class Astrologer(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     year_of_experience = models.PositiveSmallIntegerField(null=True)
+
+    def __str__(self):
+        return self.user.__str__()

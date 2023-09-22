@@ -17,13 +17,19 @@ class Conversation(BaseModel):
     )
     is_active = models.BooleanField(default=True)
 
+    def __str__(self):
+        if self.astrologer:
+            return f"{self.customer} <-> {self.astrologer}"
+        else:
+            return f"{self.customer} (Unassigned)"
+
 
 class Message(BaseModel):
-    conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE)
+    conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, related_name='messages')
     content = models.TextField()
     translated_content = models.TextField(null=True, blank=True)
     translator = models.ForeignKey(Translator, on_delete=models.SET_NULL, null=True)
     sender = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Message by {self.sender.username}"
+        return f"{self.sender.username}: {self.content}"

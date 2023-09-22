@@ -69,3 +69,11 @@ class User(AbstractUser, BaseModel):
 
     def __str__(self):
         return self.full_name or self.email
+
+    @property
+    def is_astrologer(self):
+        return hasattr(self, 'astrologer')
+
+    @property
+    def is_customer(self):
+        return hasattr(self, 'customer')

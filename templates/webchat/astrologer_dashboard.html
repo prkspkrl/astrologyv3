@@ -1,0 +1,113 @@
+
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
+  rel="stylesheet"
+/>
+
+<!-- MDB JavaScript -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"
+></script>
+
+<section style="background-color: #eee;">
+  <div id="conversation" class="container py-5">
+
+    <div class="row">
+
+      {% include 'webchat/chat_sidebar.html' %}
+
+      <div class="col-md-6 col-lg-7 col-xl-8">
+
+        <ul class="list-unstyled">
+          {% for message in selected.messages.all %}
+            {% if message.sender == request.user %}
+              {% if request.user.is_astrologer and message.translated_content %}
+                {% include 'webchat/chat_sender.html' %}
+              {% else %}
+                {% include 'webchat/chat_sender.html' %}
+              {% endif %}
+            {% else %}
+              {% if request.user.is_customer and message.translated_content %}
+                {% include 'webchat/chat_receiver.html' %}
+              {% else %}
+                {% include 'webchat/chat_receiver.html' %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+          <li class="bg-white mb-3">
+            <div class="form-outline">
+              <textarea class="form-control" id="textAreaExample2" rows="4"></textarea>
+              <label class="form-label" for="textAreaExample2">Message</label>
+            </div>
+          </li>
+          <button type="button" class="btn btn-info btn-rounded float-end">Send</button>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+function fetchMessages(id) {
+  $.ajax({
+    url: `/api/listing/conversation/${id}/fetch-messages/`, // Replace with your Django view URL for fetching messages
+    type: 'GET',
+    success: (data) => {
+      $('#conversation-section').html(data);
+    },
+    error: function () {
+      alert('An error occurred while loading the template.');
+    }
+  });
+}
+
+function sendMessage() {
+  event.preventDefault(); // Prevent the default form submission behavior
+  const selectedConversation = $($('.selected-conversation')[0]).data('id')
+  // Serialize the form data
+  var formData = $('#message-form').serialize();
+  // Send a POST request to your Django server
+  $.ajax({
+    type: 'POST',
+    url: `/api/root/conversations/${conversationId}/messages/, // Replace with your Message API URL
+    data: formData,
+    success: function (response) {
+      fetchMessages(selectedConversation);
+      const message = $("#message-input").val();
+      $("#message-input").val('');
+    },
+    error: function (error) {
+      console.log(error);
+    }
+  });
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

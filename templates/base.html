@@ -34,7 +34,8 @@
                                     <span class="as_infoicon">
                                         <img src='{% static "images/svg/headphone.svg" %}'  alt="">
                                     </span>
-                                <span class="as_orange">Talk to our Astrogers -</span>+1800 326 3264
+                                <span class="as_orange"> {{ request.user.email }} </span>
+<!--                                <span class="as_orange">Talk to our Astrogers -</span>+1800 326 3264-->
                                 </div>
                             </a>
                         </li>
@@ -62,8 +63,8 @@
                         </a>
                         <div class="as_cart">
                             <div class="as_cart_wrapper">
-                                <span><img src='{% static "images/svg/cart.svg" %}'  alt=""><span class="as_cartnumber">02</span></span>
-                                $512
+<!--                                <span><img src='{% static "images/svg/cart.svg" %}'  alt=""><span class="as_cartnumber">02</span></span>-->
+                                <a href="{% url 'logout' %}" >Logout</a>
                             </div>
 
                             <div class="as_cart_box">
@@ -76,16 +77,6 @@
 											<div class="as_cart_info">
 												<a href="#">Yellow Sapphire</a>
 												<p>1 X $20.00</p>
-												<a href="javascript:;" class="as_cart_remove"><i class="fa fa-trash"></i></a>
-											</div>
-										</li>
-										<li>
-											<div class="as_cart_img">
-												<img src='{% static "images/prod2_D.html" %}'  class="img-responsive">
-											</div>
-											<div class="as_cart_info">
-												<a href="#">yantra</a>
-												<p>1 X $10.00</p>
 												<a href="javascript:;" class="as_cart_remove"><i class="fa fa-trash"></i></a>
 											</div>
 										</li>

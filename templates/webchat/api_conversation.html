@@ -1,0 +1,35 @@
+<div class="container py-5">
+
+    <div class="row">
+
+      {% include 'webchat/chat_sidebar.html' %}
+
+      <div class="col-md-6 col-lg-7 col-xl-8">
+
+        <ul class="list-unstyled">
+          {% for message in selected.messages.all %}
+            {% if message.sender == request.user %}
+              {% if request.user.is_astrologer and message.translated_content %}
+                {% include 'webchat/chat_sender.html' %}
+              {% else %}
+                {% include 'webchat/chat_sender.html' %}
+              {% endif %}
+            {% else %}
+              {% if request.user.is_customer and message.translated_content %}
+                {% include 'webchat/chat_receiver.html' %}
+              {% else %}
+                {% include 'webchat/chat_receiver.html' %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+          <li class="bg-white mb-3">
+            <div class="form-outline">
+              <textarea class="form-control" id="textAreaExample2" rows="4"></textarea>
+              <label class="form-label" for="textAreaExample2">Message</label>
+            </div>
+          </li>
+          <button type="button" class="btn btn-info btn-rounded float-end">Send</button>
+        </ul>
+      </div>
+    </div>
+  </div>

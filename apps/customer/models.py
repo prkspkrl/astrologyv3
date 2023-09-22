@@ -19,4 +19,4 @@ class Customer(BaseModel):
         return f"{self.address_line_1}, {self.address_line_2}"
 
     def __str__(self):
-        return self.user.email
+        return self.user.__str__()
