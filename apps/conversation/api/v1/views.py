@@ -48,7 +48,7 @@ class ConversationReadOnlyViewSet(ReadOnlyViewSet):
             .filter(
                 Q(customer__user=self.request.user)
                 | Q(astrologer__user=self.request.user)
-            )
+            ).prefetch_related('messages')
         )
 
 

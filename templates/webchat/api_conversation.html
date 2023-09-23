@@ -1,6 +1,4 @@
-<div class="container py-5">
-
-    <div class="row">
+<div class="row">
 
       {% include 'webchat/chat_sidebar.html' %}
 
@@ -24,12 +22,11 @@
           {% endfor %}
           <li class="bg-white mb-3">
             <div class="form-outline">
-              <textarea class="form-control" id="textAreaExample2" rows="4"></textarea>
-              <label class="form-label" for="textAreaExample2">Message</label>
+              <textarea class="form-control" id="messageArea" rows="4"></textarea>
+              <label class="form-label" for="messageArea">Message</label>
             </div>
           </li>
-          <button type="button" class="btn btn-info btn-rounded float-end">Send</button>
+          <button onclick="sendMessage({{ selected.id }})" type="button" class="btn btn-info btn-rounded float-end">Send</button>
         </ul>
       </div>
     </div>
-  </div>

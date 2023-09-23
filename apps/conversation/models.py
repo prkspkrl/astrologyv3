@@ -15,6 +15,7 @@ class Conversation(BaseModel):
     astrologer = models.ForeignKey(
         Astrologer, on_delete=models.SET_NULL, null=True, blank=True
     )
+    translator = models.ForeignKey(Translator, on_delete=models.SET_NULL, null=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -28,7 +29,6 @@ class Message(BaseModel):
     conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, related_name='messages')
     content = models.TextField()
     translated_content = models.TextField(null=True, blank=True)
-    translator = models.ForeignKey(Translator, on_delete=models.SET_NULL, null=True)
     sender = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

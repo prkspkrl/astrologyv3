@@ -1,5 +1,8 @@
-
-<link
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+  <link
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
   rel="stylesheet"
 />
@@ -20,10 +23,80 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"
 ></script>
 
-<section style="background-color: #eee;">
-  <div id="conversation" class="container py-5">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-    <div class="row">
+<script>
+function getCSRFToken() {
+    var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    return csrfToken;
+}
+
+function fetchMessages(id) {
+  const url = id ? `/astrologer/conversations/?api=True&conversation=${id}` : '/astrologer/conversations/?api=True'
+  fetch(url, {
+    method: 'GET',
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.text();
+    })
+    .then(data => {
+      document.getElementById('conversation').innerHTML = data;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred while loading the template.');
+    });
+}
+
+fetchMessages();
+
+function sendMessage(id) {
+  const value = document.getElementById('messageArea').value
+  const data = {
+    conversation: id,
+    content: value,
+    sender: {{request.user.id}}
+  }
+  const isCustomer = '{{ request.user.is_customer }}' === 'True'
+  if(isCustomer) {
+    data['translated_content'] = value
+  }
+
+  // Send a POST request to your Django server
+  fetch(`/api/v1/conversations/${id}/messages/`, {
+    headers: {
+      'Content-Type': 'application/json', // Set the content type to JSON
+      'X-CSRFToken': getCSRFToken(),
+    },
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json(); // assuming the server returns JSON
+    })
+    .then(response => {
+      fetchMessages(id);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
+</script>
+
+</head>
+<body>
+
+<section style="background-color: #eee;">
+  {% csrf_token %}
+  <div id="conversation" class="container py-5">
+    {% comment %}
+      <div class="row">
 
       {% include 'webchat/chat_sidebar.html' %}
 
@@ -55,44 +128,12 @@
         </ul>
       </div>
     </div>
+    {% endcomment %}
   </div>
 </section>
+</body>
 
-<script>
-function fetchMessages(id) {
-  $.ajax({
-    url: `/api/listing/conversation/${id}/fetch-messages/`, // Replace with your Django view URL for fetching messages
-    type: 'GET',
-    success: (data) => {
-      $('#conversation-section').html(data);
-    },
-    error: function () {
-      alert('An error occurred while loading the template.');
-    }
-  });
-}
-
-function sendMessage() {
-  event.preventDefault(); // Prevent the default form submission behavior
-  const selectedConversation = $($('.selected-conversation')[0]).data('id')
-  // Serialize the form data
-  var formData = $('#message-form').serialize();
-  // Send a POST request to your Django server
-  $.ajax({
-    type: 'POST',
-    url: `/api/root/conversations/${conversationId}/messages/, // Replace with your Message API URL
-    data: formData,
-    success: function (response) {
-      fetchMessages(selectedConversation);
-      const message = $("#message-input").val();
-      $("#message-input").val('');
-    },
-    error: function (error) {
-      console.log(error);
-    }
-  });
-}
-</script>
+</html>
 
 
 

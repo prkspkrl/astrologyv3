@@ -8,12 +8,6 @@ class InitiateConversationSerializer(serializers.Serializer):
     content = serializers.CharField()
 
 
-class ConversationSerializer(DynamicFieldsModelSerializer):
-    class Meta:
-        model = Conversation
-        fields = "__all__"
-
-
 class MessageSerializer(DynamicFieldsModelSerializer):
     class Meta:
         model = Message
@@ -24,3 +18,11 @@ class MessageSerializer(DynamicFieldsModelSerializer):
             "translator",
             "sender",
         ]
+
+
+class ConversationSerializer(DynamicFieldsModelSerializer):
+    messages = MessageSerializer(many=True)
+
+    class Meta:
+        model = Conversation
+        fields = "__all__"

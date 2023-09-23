@@ -2,7 +2,7 @@ from django.contrib.auth.views import LoginView
 from django.urls import reverse
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, get_user_model
 from django.shortcuts import redirect
 from django.contrib import messages, auth
 from django.views import View
@@ -11,6 +11,9 @@ from django.contrib.auth import logout
 from django.db.models import Count
 
 from apps.conversation.models import Conversation
+
+
+User = get_user_model()
 
 
 class CustomLoginView(LoginView):
@@ -55,9 +58,8 @@ class ConversationListView(LoginRequiredMixin, ListView):
     context_object_name = 'conversations'
 
     def get_template_names(self):
-        if self.request.is_ajax():
-            pass
-        # ['webchat/api_conversation.html']
+        if self.request.is_ajax() or self.request.GET.get('api'):
+            return ['webchat/api_conversation.html']
         return super().get_template_names()
 
     def get_context_data(self, *agrs, **kwargs):
@@ -66,13 +68,16 @@ class ConversationListView(LoginRequiredMixin, ListView):
         selected = self.request.GET.get('conversation')
 
         selected_obj = None
-        if not selected:
+        if not selected_obj and selected:
             selected_obj = self.get_queryset().filter(id=selected).first()
 
         if not selected_obj:
             selected_obj = self.get_queryset().first()
 
         ctx['selected'] = selected_obj
+
+        print(selected_obj)
+        print(selected_obj.id)
         return ctx
 
     def get_queryset(self):

@@ -7,7 +7,12 @@
 
             <ul class="list-unstyled mb-0">
               {% for conversation in conversations %}
-                <li class="p-2 {% if not forloop.last %} border-bottom {% endif %}" style="background-color: #eee;">
+                <li
+                    data-id="{{ conversation.id }}"
+                    id="{% if selected == conversation %}selected {% else %} conversation-{{ conversation.id }} {% endif %}"
+                    onclick="fetchMessages({{ conversation.id }})"
+                    class="p-2 {% if not forloop.last %} border-bottom {% endif %} {% if selected == conversation %} bg-grey {% endif %}"
+                >
                 <a href="#!" class="d-flex justify-content-between">
                   <div class="d-flex flex-row">
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-8.webp" alt="avatar"
@@ -29,3 +34,9 @@
         </div>
 
       </div>
+
+<style>
+  .bg-grey {
+    background-color: #eee;
+  }
+</style>
