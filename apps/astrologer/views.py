@@ -27,7 +27,6 @@ class CustomLoginView(LoginView):
 
         user = auth.authenticate(request, email=email, password=password)
         # print(user.role)
-
         if user is not None:
             login(request, user)
             print("User Role: 1st", user.role)
@@ -77,17 +76,13 @@ class ConversationListView(LoginRequiredMixin, ListView):
         ctx['selected'] = selected_obj
 
         print(selected_obj)
-        print(selected_obj.id)
+        # print(selected_obj.id)
         return ctx
 
     def get_queryset(self):
         return super().get_queryset().filter(
             astrologer__user=self.request.user
         )
-
-
-class TranslatorDashboardView(LoginRequiredMixin, TemplateView):
-    template_name = 'translator_dashboard.html'
 
 
 class CustomerDashboardView(LoginRequiredMixin, TemplateView):
