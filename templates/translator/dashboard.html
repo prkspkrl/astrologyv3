@@ -62,10 +62,13 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="p-0">
+                        <form method="post" action="{% url 'message_translate' message.id %}">
+                            {% csrf_token %}
                         <div class="collapse bg-info-light px-4" id="row-{{message.id}}">
-                            <textarea class="form-control my-3" rows="2" placeholder="Translate"></textarea>
-                            <button class="btn btn-primary btn-sm mb-3">Save</button>
+                            <textarea class="form-control my-3" rows="2" name="translated_content" placeholder="Translate"></textarea>
+                            <button type="submit" class="btn btn-primary btn-sm mb-3">Save</button>
                         </div>
+                        </form>
                     </td>
                 </tr>
                 {% empty %}

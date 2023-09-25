@@ -52,7 +52,11 @@
                     </ul>
                     <div class="as_right_info">
                         {% if user.is_authenticated %}
-                        <a href="{% url 'conversations' %}" class="btn btn-lg btn-warning rounded-pill">View Conversation</a>
+                            {% if request.user.role == 'Translator' %}
+                                <a href="{% url 'translator_dashboard' %}" class="btn btn-lg btn-warning rounded-pill">Dashboard</a>
+                            {% else %}
+                                <a href="{% url 'conversations' %}" class="btn btn-lg btn-warning rounded-pill">View Conversation</a>
+                            {% endif %}
                         {% else %}
                         <a href="javascript:;">
                             <div class="as_infobox" data-bs-toggle="modal" data-bs-target="#as_login">
