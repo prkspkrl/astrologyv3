@@ -51,6 +51,13 @@
                         </li>
                     </ul>
                     <div class="as_right_info">
+                        {% if user.is_authenticated %}
+                            {% if request.user.role == 'Translator' %}
+                                <a href="{% url 'translator_dashboard' %}" class="btn btn-lg btn-warning rounded-pill">Dashboard</a>
+                            {% else %}
+                                <a href="{% url 'conversations' %}" class="btn btn-lg btn-warning rounded-pill">View Conversation</a>
+                            {% endif %}
+                        {% else %}
                         <a href="javascript:;">
                             <div class="as_infobox" data-bs-toggle="modal" data-bs-target="#as_login">
                                 <span class="as_infoicon">
@@ -58,9 +65,9 @@
                                 </span>
                                 <a href="{% url 'astrologer-login' %}">Log in / &nbsp; </a>
                                 <a href="#">Register </a>
-
                             </div>
                         </a>
+                        {% endif %}
                         <div class="as_cart">
                             <div class="as_cart_wrapper">
 <!--                                <span><img src='{% static "images/svg/cart.svg" %}'  alt=""><span class="as_cartnumber">02</span></span>-->

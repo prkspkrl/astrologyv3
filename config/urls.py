@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.home.urls')),
     path('astrologer/', include('apps.astrologer.urls')),
+    path('translator/', include('apps.translator.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('api/v1/', include('apps.api.v1.urls')),
 
