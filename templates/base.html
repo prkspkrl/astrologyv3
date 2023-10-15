@@ -68,29 +68,31 @@
                             </div>
                         </a>
                         {% endif %}
-                        <div class="as_cart">
-                            <div class="as_cart_wrapper">
-<!--                                <span><img src='{% static "images/svg/cart.svg" %}'  alt=""><span class="as_cartnumber">02</span></span>-->
-                                <a href="{% url 'logout' %}" >Logout</a>
-                            </div>
+                        {% if user.is_authenticated %}
+                            <div class="as_cart">
+                                <div class="as_cart_wrapper">
+                                    <!--                                <span><img src='{% static "images/svg/cart.svg" %}'  alt=""><span class="as_cartnumber">02</span></span>-->
+                                    <a href="{% url 'logout' %}">Logout</a>
+                                </div>
 
-                            <div class="as_cart_box">
-								<div class="as_cart_list">
-									<ul>
-										<li>
-											<div class="as_cart_img">
-												<img src='{% static "images/prod1_d.jpg" %}'  class="img-responsive">
-											</div>
-											<div class="as_cart_info">
-												<a href="#">Yellow Sapphire</a>
-												<p>1 X $20.00</p>
-												<a href="javascript:;" class="as_cart_remove"><i class="fa fa-trash"></i></a>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-                        </div>
+                                <div class="as_cart_box">
+                                    <div class="as_cart_list">
+                                        <ul>
+                                            <li>
+                                                <div class="as_cart_img">
+                                                    <img src='{% static "images/prod1_d.jpg" %}'  class="img-responsive">
+                                                </div>
+                                                <div class="as_cart_info">
+                                                    <a href="#">Yellow Sapphire</a>
+                                                    <p>1 X $20.00</p>
+                                                    <a href="javascript:;" class="as_cart_remove"><i class="fa fa-trash"></i></a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="as_menu_wrapper">

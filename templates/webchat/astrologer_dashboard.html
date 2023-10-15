@@ -27,6 +27,9 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
 <script>
+function scrollToBottom() {
+    $("html, body").animate({ scrollTop: $('#conversation').height() }, "fast");
+}
 function getCSRFToken() {
     var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     return csrfToken;
@@ -45,11 +48,13 @@ function fetchMessages(id) {
     })
     .then(data => {
       document.getElementById('conversation').innerHTML = data;
+      scrollToBottom();
     })
     .catch(error => {
       console.error('Error:', error);
       alert('An error occurred while loading the template.');
     });
+  scrollToBottom()
 }
 
 fetchMessages();
@@ -94,7 +99,7 @@ function sendMessage(id) {
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{% url 'home' %}">
             <img src='{% static "images/logo.svg" %}'  alt="Astrology Logo" height="40px">
         </a>
         <a href="{% url 'logout' %}" class="btn btn-light rounded-pill border">
@@ -104,42 +109,7 @@ function sendMessage(id) {
 </nav>
 <section style="background-color: #eee;">
   {% csrf_token %}
-  <div id="conversation" class="container py-5">
-    {% comment %}
-      <div class="row">
-
-      {% include 'webchat/chat_sidebar.html' %}
-
-      <div class="col-md-6 col-lg-7 col-xl-8">
-
-        <ul class="list-unstyled">
-          {% for message in selected.messages.all %}
-            {% if message.sender == request.user %}
-              {% if request.user.is_astrologer and message.translated_content %}
-                {% include 'webchat/chat_sender.html' %}
-              {% else %}
-                {% include 'webchat/chat_sender.html' %}
-              {% endif %}
-            {% else %}
-              {% if request.user.is_customer and message.translated_content %}
-                {% include 'webchat/chat_receiver.html' %}
-              {% else %}
-                {% include 'webchat/chat_receiver.html' %}
-              {% endif %}
-            {% endif %}
-          {% endfor %}
-          <li class="bg-white mb-3">
-            <div class="form-outline">
-              <textarea class="form-control" id="textAreaExample2" rows="4"></textarea>
-              <label class="form-label" for="textAreaExample2">Message</label>
-            </div>
-          </li>
-          <button type="button" class="btn btn-info btn-rounded float-end">Send</button>
-        </ul>
-      </div>
-    </div>
-    {% endcomment %}
-  </div>
+  <div id="conversation" class="container py-5"></div>
 </section>
 </body>
 

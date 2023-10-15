@@ -2,7 +2,7 @@
 
       {% include 'webchat/chat_sidebar.html' %}
 
-      <div class="col-md-6 col-lg-7 col-xl-8">
+      <div class="col-md-6 col-lg-7 col-xl-8" id="conversation">
 
         <ul class="list-unstyled">
           {% for message in selected.messages.all %}
