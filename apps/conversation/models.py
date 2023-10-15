@@ -30,6 +30,7 @@ class Message(BaseModel):
     content = models.TextField()
     translated_content = models.TextField(null=True, blank=True)
     sender = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_viewed = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.sender.username}: {self.content}"

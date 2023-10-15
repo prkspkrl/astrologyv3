@@ -8,7 +8,7 @@ from django.contrib import messages, auth
 from django.views import View
 from django.urls import reverse_lazy
 from django.contrib.auth import logout
-from django.db.models import Count
+from django.db.models import Count, Q
 
 from apps.conversation.models import Conversation
 
@@ -72,7 +72,7 @@ class ConversationListView(LoginRequiredMixin, ListView):
 
         if not selected_obj:
             selected_obj = self.get_queryset().first()
-
+        selected_obj.messages.filter(is_viewed=False).exclude(sender=self.request.user).update(is_viewed=True)
         ctx['selected'] = selected_obj
 
         print(selected_obj)
@@ -82,6 +82,8 @@ class ConversationListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return super().get_queryset().filter(
             astrologer__user=self.request.user
+        ).annotate(
+            unread_count=Count('messages', filter=Q(messages__is_viewed=False) & ~Q(messages__sender=self.request.user))
         )
 
 
