@@ -7,7 +7,11 @@
         </div>
         <div class="card-body">
             <p class="mb-0">
-                {{ message.translated_content }}
+                {% if message.translated_content  %}
+                    {{ message.translated_content }}
+                {% else %}
+                    {{ message.content }}
+                {% endif %}
             </p>
         </div>
     </div>
